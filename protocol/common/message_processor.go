@@ -207,6 +207,7 @@ func (p *MessageProcessor) sendPrivate(
 	p.notifyOnScheduledMessage(rawMessage)
 
 	if p.featureFlags.Datasync && rawMessage.ResendAutomatically {
+		p.logger.Info("=== SEND message via DATASYNC")
 		// No need to call transport tracking.
 		// It is done in a data sync dispatch step.
 		if err := p.addToDataSync(recipient, wrappedMessage); err != nil {
