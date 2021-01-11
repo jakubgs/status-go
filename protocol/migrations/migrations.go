@@ -20,6 +20,7 @@
 // 1603816533_add_links.up.sql (48B)
 // 1603888149_create_chat_identity_last_published_table.up.sql (407B)
 // 1605075346_add_communities.up.sql (6.971kB)
+// 1610361835_add_communities_request_to_join.up.sql (281B)
 // README.md (554B)
 // doc.go (850B)
 
@@ -485,8 +486,28 @@ func _1605075346_add_communitiesUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1605075346_add_communities.up.sql", size: 6971, mode: os.FileMode(0644), modTime: time.Unix(1610018391, 0)}
+	info := bindataFileInfo{name: "1605075346_add_communities.up.sql", size: 6971, mode: os.FileMode(0644), modTime: time.Unix(1610091838, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x1f, 0x64, 0xea, 0xb4, 0xae, 0x9e, 0xdb, 0x9, 0x58, 0xb6, 0x5c, 0x7a, 0x50, 0xc5, 0xfe, 0x93, 0x5d, 0x36, 0x85, 0x5d, 0x6a, 0xba, 0xc9, 0x7e, 0x84, 0xd7, 0xbf, 0x2a, 0x53, 0xf3, 0x97, 0xf1}}
+	return a, nil
+}
+
+var __1610361835_add_communities_request_to_joinUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x84\x8f\xc1\x4a\xc4\x30\x14\x45\xf7\xf9\x8a\xcb\xac\x66\x60\xfe\xc0\xd5\x4b\x4d\xb1\x18\x13\x89\xa9\xd0\x55\x28\x6d\xc4\xa8\x4d\xb0\x49\x05\xff\x5e\xaa\xdd\x94\x2e\xdc\x5e\xce\x7d\xef\x9e\xca\x08\xb2\x02\x96\xb8\x14\x18\xd2\x34\x2d\x31\x94\xe0\xb3\x9b\xfd\xe7\xe2\x73\xc9\xae\x24\xf7\x96\x42\x04\xce\x0c\xd8\x52\x3c\x93\xa9\xee\xc8\x40\x69\x0b\xd5\x4a\x79\x65\xc0\xf0\x91\x86\x77\x34\xca\xee\x52\x1f\xb3\x8b\xfd\xe4\x0f\x15\xdc\x8a\x9a\x5a\x69\x71\x3a\xfd\xb6\x5f\xfb\xe2\xc2\xf8\x2f\xb6\x4d\xfc\x5e\x59\x2e\x35\xdf\x3d\xfb\xf2\x73\x78\x09\x7e\x04\xd7\x5a\x0a\x52\xc7\x2b\x35\xc9\x27\xb1\xa2\x8f\xa6\x79\x20\xd3\xe1\x5e\x74\x38\x6f\x5a\xd7\x3f\x87\x0b\xbb\xdc\xb0\x9f\x00\x00\x00\xff\xff\xb2\x7c\xa2\xf7\x19\x01\x00\x00")
+
+func _1610361835_add_communities_request_to_joinUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__1610361835_add_communities_request_to_joinUpSql,
+		"1610361835_add_communities_request_to_join.up.sql",
+	)
+}
+
+func _1610361835_add_communities_request_to_joinUpSql() (*asset, error) {
+	bytes, err := _1610361835_add_communities_request_to_joinUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "1610361835_add_communities_request_to_join.up.sql", size: 281, mode: os.FileMode(0644), modTime: time.Unix(1610361995, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x10, 0x43, 0x53, 0x92, 0x7f, 0xb1, 0x5, 0x95, 0x13, 0xde, 0xb5, 0x3c, 0x5, 0xf2, 0xda, 0x9b, 0x4d, 0xd3, 0xdc, 0x6b, 0x1a, 0xdc, 0x60, 0x92, 0xa, 0x7f, 0xd3, 0x74, 0x57, 0x8e, 0x3b, 0x35}}
 	return a, nil
 }
 
@@ -505,7 +526,7 @@ func readmeMd() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "README.md", size: 554, mode: os.FileMode(0644), modTime: time.Unix(1610018362, 0)}
+	info := bindataFileInfo{name: "README.md", size: 554, mode: os.FileMode(0644), modTime: time.Unix(1610091838, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x1c, 0x6e, 0xfb, 0xcc, 0x81, 0x94, 0x4d, 0x8c, 0xa0, 0x3b, 0x5, 0xb0, 0x18, 0xd6, 0xbb, 0xb3, 0x79, 0xc8, 0x8f, 0xff, 0xc1, 0x10, 0xf9, 0xf, 0x20, 0x1b, 0x4a, 0x74, 0x96, 0x42, 0xd7, 0xa8}}
 	return a, nil
 }
@@ -661,6 +682,8 @@ var _bindata = map[string]func() (*asset, error){
 
 	"1605075346_add_communities.up.sql": _1605075346_add_communitiesUpSql,
 
+	"1610361835_add_communities_request_to_join.up.sql": _1610361835_add_communities_request_to_joinUpSql,
+
 	"README.md": readmeMd,
 
 	"doc.go": docGo,
@@ -727,8 +750,9 @@ var _bintree = &bintree{nil, map[string]*bintree{
 	"1603816533_add_links.up.sql":                                 &bintree{_1603816533_add_linksUpSql, map[string]*bintree{}},
 	"1603888149_create_chat_identity_last_published_table.up.sql": &bintree{_1603888149_create_chat_identity_last_published_tableUpSql, map[string]*bintree{}},
 	"1605075346_add_communities.up.sql":                           &bintree{_1605075346_add_communitiesUpSql, map[string]*bintree{}},
-	"README.md":                                                   &bintree{readmeMd, map[string]*bintree{}},
-	"doc.go":                                                      &bintree{docGo, map[string]*bintree{}},
+	"1610361835_add_communities_request_to_join.up.sql":           &bintree{_1610361835_add_communities_request_to_joinUpSql, map[string]*bintree{}},
+	"README.md": &bintree{readmeMd, map[string]*bintree{}},
+	"doc.go":    &bintree{docGo, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory.
