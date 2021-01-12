@@ -647,11 +647,10 @@ func (s *MessengerSuite) TestRetrieveBlockedContact() {
 
 	publicKeyHex := "0x" + hex.EncodeToString(crypto.FromECDSAPub(&theirMessenger.identity.PublicKey))
 	blockedContact := Contact{
-		ID:            publicKeyHex,
-		Name:          "contact-name",
-		LastUpdated:   20,
-		SystemTags:    []string{contactBlocked},
-		TributeToTalk: "talk",
+		ID:          publicKeyHex,
+		Name:        "contact-name",
+		LastUpdated: 20,
+		SystemTags:  []string{contactBlocked},
 	}
 
 	s.Require().NoError(s.m.SaveContact(&blockedContact))
@@ -1223,7 +1222,6 @@ func (s *MessengerSuite) TestBlockContact() {
 				FCMToken:       "token-2",
 			},
 		},
-		TributeToTalk: "talk",
 	}
 
 	chat1 := Chat{
@@ -1405,7 +1403,6 @@ func (s *MessengerSuite) TestContactPersistence() {
 				FCMToken:       "token-2",
 			},
 		},
-		TributeToTalk: "talk",
 	}
 
 	s.Require().NoError(s.m.SaveContact(&contact))
@@ -1439,7 +1436,6 @@ func (s *MessengerSuite) TestContactPersistenceUpdate() {
 				FCMToken:       "token-2",
 			},
 		},
-		TributeToTalk: "talk",
 	}
 
 	s.Require().NoError(s.m.SaveContact(&contact))
