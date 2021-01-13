@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/ecdsa"
 
+	"github.com/status-im/status-go/eth-node/crypto"
 	"github.com/status-im/status-go/eth-node/types"
 )
 
@@ -22,6 +23,7 @@ type Transport interface {
 	SendPublic(ctx context.Context, newMessage *types.NewMessage, chatName string) ([]byte, error)
 	SendPrivateWithSharedSecret(ctx context.Context, newMessage *types.NewMessage, publicKey *ecdsa.PublicKey, secret []byte) ([]byte, error)
 	SendPrivateWithPartitioned(ctx context.Context, newMessage *types.NewMessage, publicKey *ecdsa.PublicKey) ([]byte, error)
+	SendCommunityMessage(ctx context.Context, newMessage *types.NewMessage, publicKey *ecdsa.PublicKey) ([]byte, error)
 	SendMessagesRequest(
 		ctx context.Context,
 		peerID []byte,
@@ -33,6 +35,7 @@ type Transport interface {
 
 	InitFilters(chatIDs []string, publicKeys []*ecdsa.PublicKey) ([]*Filter, error)
 	InitPublicFilters(chatIDs []string) ([]*Filter, error)
+	InitCommunityFilters(pks []*ecdsa.PrivateKey) ([]*Filter, error)
 	LoadFilters(filters []*Filter) ([]*Filter, error)
 	RemoveFilters(filters []*Filter) error
 	RemoveFilterByChatID(string) (*Filter, error)
@@ -43,4 +46,8 @@ type Transport interface {
 	RetrieveRawAll() (map[Filter][]*types.Message, error)
 
 	SetEnvelopeEventsHandler(handler EnvelopeEventsHandler) error
+}
+
+func PubkeyToHex(key *ecdsa.PublicKey) string {
+	return types.EncodeHex(crypto.FromECDSAPub(key))
 }

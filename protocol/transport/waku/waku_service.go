@@ -139,6 +139,10 @@ func (a *Transport) LoadFilters(filters []*transport.Filter) ([]*transport.Filte
 	return a.filters.InitWithFilters(filters)
 }
 
+func (a *Transport) InitCommunityFilters(pks []*ecdsa.PrivateKey) ([]*transport.Filter, error) {
+	return a.filters.InitCommunityFilters(pks)
+}
+
 func (a *Transport) RemoveFilters(filters []*transport.Filter) error {
 	return a.filters.Remove(filters...)
 }
@@ -280,25 +284,27 @@ func (a *Transport) SendPrivateWithPartitioned(ctx context.Context, newMessage *
 	return a.api.Post(ctx, *newMessage)
 }
 
-func (a *Transport) LoadKeyFilters(key *ecdsa.PrivateKey) (*transport.Filter, error) {
-	return a.filters.LoadPartitioned(&key.PublicKey, key, true)
-}
-
-func (a *Transport) SendPrivateOnDiscovery(ctx context.Context, newMessage *types.NewMessage, publicKey *ecdsa.PublicKey) ([]byte, error) {
+func (a *Transport) SendCommunityMessage(ctx context.Context, newMessage *types.NewMessage, publicKey *ecdsa.PublicKey) ([]byte, error) {
 	if err := a.addSig(newMessage); err != nil {
 		return nil, err
 	}
 
-	// There is no need to load any chat
-	// because listening on the discovery topic
-	// is done automatically.
-	// TODO: change this anyway, it should be explicit
-	// and idempotent.
+	// We load the filter to make sure we can post on it
+	filter, err := a.filters.LoadPublic(transport.PubkeyToHex(publicKey)[2:])
+	if err != nil {
+		return nil, err
+	}
 
-	newMessage.Topic = types.BytesToTopic(transport.ToTopic(transport.DiscoveryTopic()))
+	newMessage.Topic = filter.Topic
 	newMessage.PublicKey = crypto.FromECDSAPub(publicKey)
 
+	a.logger.Debug("SENDING message", zap.Binary("topic", filter.Topic[:]))
+
 	return a.api.Post(ctx, *newMessage)
+}
+
+func (a *Transport) LoadKeyFilters(key *ecdsa.PrivateKey) (*transport.Filter, error) {
+	return a.filters.LoadPartitioned(&key.PublicKey, key, true)
 }
 
 func (a *Transport) addSig(newMessage *types.NewMessage) error {

@@ -16,7 +16,7 @@ type MessengerResponse struct {
 	EmojiReactions          []*EmojiReaction                `json:"emojiReactions,omitempty"`
 	Invitations             []*GroupChatInvitation          `json:"invitations,omitempty"`
 	Communities             []*communities.Community        `json:"communities,omitempty"`
-	CommunityRequestsToJoin []*communities.RequestToJoin    `json:"communityRequestsToJoin,omitempty"`
+	RequestsToJoinCommunity []*communities.RequestToJoin    `json:"requestsToJoinCommunity,omitempty"`
 	CommunityChanges        []*communities.CommunityChanges `json:"communitiesChanges,omitempty"`
 	Filters                 []*transport.Filter             `json:"filters,omitempty"`
 	RemovedFilters          []*transport.Filter             `json:"removedFilters,omitempty"`
@@ -26,8 +26,7 @@ type MessengerResponse struct {
 }
 
 func (m *MessengerResponse) IsEmpty() bool {
-
-	return len(m.Chats)+len(m.Messages)+len(m.Contacts)+len(m.Installations)+len(m.Invitations)+len(m.EmojiReactions)+len(m.Communities)+len(m.CommunityChanges)+len(m.Filters)+len(m.RemovedFilters)+len(m.RemovedChats)+len(m.CommunityRequestsToJoin)+len(m.Notifications) == 0
+	return len(m.Chats)+len(m.Messages)+len(m.Contacts)+len(m.Installations)+len(m.Invitations)+len(m.EmojiReactions)+len(m.Communities)+len(m.CommunityChanges)+len(m.Filters)+len(m.RemovedFilters)+len(m.RemovedChats)+len(m.RequestsToJoinCommunity)+len(m.Notifications) == 0
 }
 
 // Merge takes another response and appends the new Chats & new Messages and replaces

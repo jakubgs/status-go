@@ -8,6 +8,12 @@ import (
 	"github.com/status-im/status-go/protocol/protobuf"
 )
 
+var (
+	ErrCreateCommunityInvalidName        = errors.New("create-community: invalid name")
+	ErrCreateCommunityInvalidDescription = errors.New("create-community: invalid description")
+	ErrCreateCommunityInvalidMembership  = errors.New("create-community: invalid membership")
+)
+
 type CreateCommunity struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
@@ -25,9 +31,18 @@ func adaptIdentityImageToProtobuf(img *userimages.IdentityImage) *protobuf.Ident
 }
 
 func (c *CreateCommunity) Validate() error {
-	if c.Name == "" || c.Description == "" || c.Membership == protobuf.CommunityPermissions_UNKNOWN_ACCESS {
-		return errors.New("CreateCommunity request invalid")
+	if c.Name == "" {
+		return ErrCreateCommunityInvalidName
 	}
+
+	if c.Description == "" {
+		return ErrCreateCommunityInvalidDescription
+	}
+
+	if c.Membership == protobuf.CommunityPermissions_UNKNOWN_ACCESS {
+		return ErrCreateCommunityInvalidMembership
+	}
+
 	return nil
 }
 
